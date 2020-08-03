@@ -21,23 +21,27 @@ public class DemoUnitOfWorkFactory implements UnitOfWorkFactory {
         this.headerNames = headerNames;
     }
 
+    public Optional<List<String>> headerNames() {
+        return Optional.ofNullable(headerNames);
+    }
+
     @Override
     public UnitOfWork createUnitOfWork(Exchange exchange) {
-        UnitOfWork answer;
+        UnitOfWork unit;
 
         if (exchange.getContext().isUseMDCLogging()) {
 
             // allow customization of the logged headers
-            if (headerNames != null) {
-                answer = new DemoMDCUnitOfWork(exchange, headerNames);
+            if (headerNames().isPresent()) {
+                unit = new DemoMDCUnitOfWork(exchange, headerNames);
             } else {
                 // fallback to default headers
-                answer = new DemoMDCUnitOfWork(exchange);
+                unit = new DemoMDCUnitOfWork(exchange);
             }
         } else {
-            answer = new DefaultUnitOfWork(exchange);
+            unit = new DefaultUnitOfWork(exchange);
         }
 
-        return answer;
+        return unit;
     }
 }
