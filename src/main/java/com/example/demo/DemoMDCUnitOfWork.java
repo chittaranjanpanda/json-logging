@@ -1,22 +1,18 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.AsyncCallback;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.TypeConversionException;
 import org.apache.camel.impl.engine.MDCUnitOfWork;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
-import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class DemoMDCUnitOfWork extends MDCUnitOfWork {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
 
     /**
      * List of header names that will be added to MDC logging if found. Also the list used to clean up
@@ -47,15 +43,15 @@ public class DemoMDCUnitOfWork extends MDCUnitOfWork {
 
     private void addMyHeaders(Exchange exchange, String headerName) {
 
-        String optionalValue;
+        String headerValue;
         try {
-            optionalValue = exchange.getIn().getHeader(headerName, String.class);
-            if (optionalValue != null) {
-                MDC.put(headerName, optionalValue);
-                LOG.trace("Adding header ({}={}) to MDC logging", headerName, optionalValue);
+            headerValue = exchange.getIn().getHeader(headerName, String.class);
+            if (headerValue != null) {
+                MDC.put(headerName, headerValue);
+                log.trace("Adding header ({}={}) to MDC logging", headerName, headerValue);
             }
         } catch (TypeConversionException e) {
-            LOG.warn(e.getMessage(), e);
+            log.warn(e.getMessage(), e);
         }
     }
 

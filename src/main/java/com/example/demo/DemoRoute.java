@@ -14,9 +14,6 @@ import java.util.Random;
 @Component
 public class DemoRoute extends RouteBuilder {
 
-    @Autowired
-    private CamelContext context;
-
     @Override
     public void configure() {
         from("timer:test?period=5s").id("demoRoute")
