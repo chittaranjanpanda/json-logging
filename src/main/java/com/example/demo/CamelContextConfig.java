@@ -19,8 +19,10 @@ public class CamelContextConfig implements CamelContextConfiguration {
 
     @Override
     public void beforeApplicationStart(CamelContext camelContext) {
-        ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
-        extendedCamelContext.setUnitOfWorkFactory(new DemoUnitOfWorkFactory(mdcHeaderNames));
+        if(camelContext.isUseMDCLogging()) {
+            ExtendedCamelContext extendedCamelContext = camelContext.adapt(ExtendedCamelContext.class);
+            extendedCamelContext.setUnitOfWorkFactory(new DemoUnitOfWorkFactory(mdcHeaderNames));
+        }
     }
 
     @Override
