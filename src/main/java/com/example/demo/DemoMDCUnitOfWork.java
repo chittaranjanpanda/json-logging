@@ -7,6 +7,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.TypeConversionException;
 import org.apache.camel.impl.engine.MDCUnitOfWork;
 import org.slf4j.MDC;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +47,7 @@ public class DemoMDCUnitOfWork extends MDCUnitOfWork {
         String headerValue;
         try {
             headerValue = exchange.getIn().getHeader(headerName, String.class);
-            if (headerValue != null) {
+            if (!StringUtils.isEmpty(headerValue)) {
                 MDC.put(headerName, headerValue);
                 log.trace("Adding header ({}={}) to MDC logging", headerName, headerValue);
             }
