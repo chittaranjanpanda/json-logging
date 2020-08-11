@@ -56,11 +56,21 @@ from("timer:test?period=5s").id("demoRoute")
 
 Let's enable logstash-logback-encoder in our application :
 
-**Step 1: Create a logback-spring.xml in our resources folder. Example : [logback-spring.xml](src/main/resources/logback-spring.xml)**
+**Step 1: Add dependencies to pom.xml**
+
+```xml
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>6.4</version>
+		</dependency>
+```
+
+**Step 2: Create a logback-spring.xml in our resources folder. Example : [logback-spring.xml](src/main/resources/logback-spring.xml)**
 
 Now our JSON Logging is enabled in our application.
 
-**Step 2: Use StructuredArguments in our Camel Processor and Beans. Example : [InvoiceProcessor](src/main/java/com/example/demo/processor/InvoiceProcessor.java)**
+**Step 3: Use StructuredArguments in our Camel Processor and Beans. Example : [InvoiceProcessor](src/main/java/com/example/demo/processor/InvoiceProcessor.java)**
 
 
 
