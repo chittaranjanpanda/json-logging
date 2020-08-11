@@ -127,7 +127,7 @@ camel:
     use-mdc-logging: true
 ```
 
-After this we will see   "camel.exchangeId", "camel.contextId", "camel.routeId" , "camel.messageId" in our JSON logs by default.
+After this we will see   "camel.exchangeId", "camel.contextId", "camel.routeId", "camel.breadcrumbId", "camel.messageId" in our JSON logs by default.
 
 **Step 2: Add our custom header configuration list** 
 
