@@ -2,11 +2,11 @@
 
 
 
-##  Why Structured (JSON) Logging ?
+##  Why Structured (JSON) Logging?
 
-The biggest benefit of logging in JSON is that it’s a structured data format. This makes it possible for you to analyze your logs of your application and troubleshoot issues faster. 
+The biggest benefit of logging in JSON is that it’s a structured data format. This makes it possible for you to analyze the logs of your application and troubleshoot issues faster. 
 
-In ELK / EFK stack instead of parsing our logs to json format using regex or using grok filters. we can make our application to emit logs as json objects. where we can add additional json fields easily so that it can help us to query and analyze our logs effectively.  [ReadMoreHere](https://www.elastic.co/blog/structured-logging-filebeat)
+In ELK / EFK stack instead of parsing our logs to JSON format using regex or using grok filters. we can make our application to emit logs as JSON objects. where we can add additional JSON fields easily so that it can help us to query and analyze our logs effectively.  [ReadMoreHere](https://www.elastic.co/blog/structured-logging-filebeat)
 
 ```verilog
 2020-08-10 23:31:25.443  INFO 20536 --- [ - timer://test] com.example.demo.DemoRoute               : 2. invoice generated coupaInvoiceId=262877147957987637 and coupaInvoiceNumber=num123
@@ -36,14 +36,14 @@ Structured Log :
 
 
 
-## How can we achieve Structured Logging in Spring Boot Application ?
+## How can we achieve Structured Logging in Spring Boot Application?
 
 There are few library dependencies available which can be used to achieve structured logging in our java application.
 
 - By using [log4J2 or logback ](https://www.baeldung.com/java-log-json-output)
 - By using [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder)
 
-Using logstash-logback-encoder gives us benefit of StructuredArguments and Markers to add additional fields to the JSON output. Read the logstash-logback-encoder document for more information.
+Using logstash-logback-encoder gives us the benefit of StructuredArguments and Markers to add additional fields to the JSON output. Read the logstash-logback-encoder document for more information.
 
 :warning: **Note** : *StructuredArguments can be used in Java Classes like Camel Processor and Camel Bean but not in camel routes.*
 
@@ -54,13 +54,13 @@ from("timer:test?period=5s").id("demoRoute")
 // We will use MDC logging in camel routes to log Exchange Header as JSON fields.
 ```
 
-Lets enable logstash-logback-encoder in our application :
+Let's enable logstash-logback-encoder in our application :
 
-**Step 1 : Create a logback-spring.xml in our resources folder. Example : [logback-spring.xml](src/main/resources/logback-spring.xml)**
+**Step 1: Create a logback-spring.xml in our resources folder. Example : [logback-spring.xml](src/main/resources/logback-spring.xml)**
 
 Now our JSON Logging is enabled in our application.
 
-**Step 2 : Use StructuredArguments in our Camel Processor and Beans. Example : [InvoiceProcessor](src/main/java/com/example/demo/processor/InvoiceProcessor.java)**
+**Step 2: Use StructuredArguments in our Camel Processor and Beans. Example : [InvoiceProcessor](src/main/java/com/example/demo/processor/InvoiceProcessor.java)**
 
 
 
@@ -68,11 +68,11 @@ Now our JSON Logging is enabled in our application.
 
 ## How to control normal logging and JSON logging using spring profile in Spring boot Application?
 
-**Step 1 : Create two profiles in springboot application application-standalone.yml and application-kubernetes.yml**
+**Step 1: Create two profiles in spring-boot application application-standalone.yml and application-kubernetes.yml**
 
 We will use standalone properties yml for our normal log configurations and kubernetes properties yml for JSON log configuration. So we will move all our JSON logging related configuration to application-kubernetes.yml
 
-**Step 2 : Create two springProfile in logback-spring.xml same like application yml.**
+**Step 2: Create two springProfile in logback-spring.xml same like application yml.**
 
 Standalone for normal logging
 
@@ -92,7 +92,7 @@ Kubernetes for JSON logging
 </springProfile>
 ```
 
-**Step 3 : Activate profiles as per our requirement**
+**Step 3: Activate profiles as per our requirement**
 
 ```yaml
 spring:
@@ -104,11 +104,11 @@ spring:
 
 
 
-## How can we use MDC Logging in camel route ?
+## How can we use MDC Logging in the camel route?
 
 To enable MDC (mapped diagnostic context) Logging in camel application. 
 
-**Step 1 : Enable mdc logging in our camel springboot application by configuring our application-kubernetes.yaml like bellow**
+**Step 1 : Enable MDC logging in our camel spring-boot application by configuring our application-kubernetes.yaml like bellow**
 
 ```yaml
 # Enable Camel MDC logging in Application
@@ -119,13 +119,13 @@ camel:
 
 After this we will see   "camel.exchangeId", "camel.contextId", "camel.routeId" , "camel.messageId" in our JSON logs by default.
 
-**Step 2 : Add our custom header configuration list** 
+**Step 2: Add our custom header configuration list** 
 
 ```yaml
-# Custom Header names . This is custom property which we will use in our configuration
+# Custom Header names. This is the custom property which we will use in our configuration
 application:
   log:
-    mdc-header-names:
+    MDC-header-names:
       - CoupaInvoiceId
       - CoupaInvoiceNumber
 ```
