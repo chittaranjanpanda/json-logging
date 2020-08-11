@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.config.mdc;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.AsyncCallback;

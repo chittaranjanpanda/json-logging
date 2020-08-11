@@ -4,11 +4,12 @@ server:
 debug: true
 
 spring:
+  profiles:
+    active: default, kubernetes
+
   application:
     name: demo-app
     version: @project.version@
-  profiles:
-    active: default, kubernetes
 
 #logging:
 #  pattern:

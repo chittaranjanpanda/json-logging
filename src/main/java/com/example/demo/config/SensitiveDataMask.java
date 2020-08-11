@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.config;
 
 import com.fasterxml.jackson.core.JsonStreamContext;
 import net.logstash.logback.encoder.org.apache.commons.lang3.RegExUtils;

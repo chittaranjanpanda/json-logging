@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.config;
 
+import com.example.demo.config.mdc.DemoUnitOfWorkFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.spring.boot.CamelContextConfiguration;

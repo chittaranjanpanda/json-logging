@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.config.mdc;
 
+import com.example.demo.config.DemoConfigProperties;
+import com.example.demo.config.mdc.DemoMDCUnitOfWork;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.engine.DefaultUnitOfWork;
 import org.apache.camel.spi.UnitOfWork;
